@@ -1,0 +1,24 @@
+[
+    [
+        {
+            "src":"../static/img/1.jpg"
+        },
+        {
+            "src":"../static/img/2.jpg"
+        },
+        {
+            "src":"../static/img/3.jpg"
+        }
+    ],
+    [
+        {
+            "src":"../static/img/gooslist/infoimg/1.jpg"
+        },
+        {
+            "src":"../static/img/gooslist/infoimg/2.jpg"
+        },
+        {
+            "src":"../static/img/gooslist/infoimg/3.jpg"
+        }
+    ]
+]

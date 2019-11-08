@@ -1,0 +1,13 @@
+
+    {
+        "title":"不敌中国本土国货 美国品牌正失去中国消费者...",
+        "data":"2019/10/18 16:12:13",
+        "click":"2",
+        "img":[
+            {"src":"../../../static/img/infoimg/1.jpg"},
+            {"src":"../../../static/img/infoimg/2.jpg"},
+            {"src":"../../../static/img/infoimg/3.jpg"},
+            {"src":"../../../static/img/infoimg/4.jpg"},
+            {"src":"../../../static/img/infoimg/5.jpg"}
+        ]
+    }

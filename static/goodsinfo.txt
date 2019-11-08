@@ -1,0 +1,47 @@
+[
+    {
+        "id":"87",
+        "title":"联想 Z5S 后置三摄 6.3寸水滴屏",
+        "add_time":"2015-02-12T16:10:02.000Z",
+        "goods_no":"SD23232442",
+        "stock_quantity":"2",
+        "market_price":"1055.00",
+        "sell_price":"819.00"
+    },
+    {
+        "id":"88",
+        "title":"华为型号: mate 10 pro 4G全网通",
+        "add_time":"2014-02-12T16:22:02.000Z",
+        "goods_no":"SF433236543",
+        "stock_quantity":"5",
+        "market_price":"1710.00",
+        "sell_price":"1328.00"
+    },
+    {
+        "id":"89",
+        "title":"Apple/苹果 iPhone 11",
+        "add_time":"2016-02-12T16:22:02.000Z",
+        "goods_no":"AP2223232442",
+        "stock_quantity":"10",
+        "market_price":"6799.00",
+        "sell_price":"5499.00"
+    },
+    {
+        "id":"90",
+        "title":"荣耀20 pro 4G全网通",
+        "add_time":"2018-02-12T16:22:02.000Z",
+        "goods_no":"SW4423232442",
+        "stock_quantity":"4",
+        "market_price":"3199.00",
+        "sell_price":"2699.00"
+    },
+    {
+        "id":"91",
+        "title":"小米CC9美图定制版骁龙710智能学生手机",
+        "add_time":"2001-02-12T16:22:02.000Z",
+        "goods_no":"SD8765332",
+        "stock_quantity":"11",
+        "market_price":"2599.00",
+        "sell_price":"2199.00"
+    }
+]

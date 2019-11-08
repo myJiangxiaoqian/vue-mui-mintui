@@ -1,0 +1,12 @@
+/* 缩略图全局样式 */
+figure{
+    width:95px;
+    height:95px;
+    float: left;
+    margin:0;
+    padding:0;
+}
+figure a img{
+    width:95px;
+    height:95px;
+}
