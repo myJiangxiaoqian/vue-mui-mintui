@@ -2,9 +2,9 @@
   <div id="app">
     <!-- 头部区域 -->
     <mt-header fixed title="餐饮">
-      <router-link to="/" slot="left">
+      <span slot="left" @click="gobank" v-show="hflag">
         <mt-button icon="back">返回</mt-button>
-      </router-link>
+      </span>
     </mt-header>
     <!-- 中间区域 -->
     <transition>
@@ -22,7 +22,7 @@
 			</router-link>
 			<router-link class="mui-tab-item1" to="/shopcar">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge">0</span>
+          <span class="mui-badge" id="badge" ref="badge">{{ $store.getters.getAllcount}}</span>
         </span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
@@ -39,10 +39,32 @@ export default {
   name: 'App',
   data () {
     return {
+        hflag:false
+    }
+  },
+  created(){
+    //判断是否为主页，显示返回按钮的判断
+    if(this.$route.path=='/home'){
+      this.hflag = false
+    }else{
+      this.hflag = true
     }
   },
   methods:{
-    
+    //返回上一步操作
+    gobank(){
+      this.$router.go(-1);
+    }
+  },
+  watch:{
+    //通过watch监听路由
+    "$route.path":function(newval){
+      if(newval==='/home'){
+          this.hflag = false;
+      }else{
+          this.hflag = true;
+      }
+    }
   }
 }
 </script>
@@ -52,7 +74,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   overflow-x: hidden;
   padding-bottom:50px;

@@ -42,6 +42,7 @@
         row-reverse:主轴为水平方向，起点在右端
         column:主轴为垂直方向，起点在上沿
         column-reverse:主轴为垂直方向，起点在下沿
+## align-items: center; 垂直居中
 
 ## 全局定义时间过滤器
     使用时间组件 moment
@@ -149,3 +150,103 @@
     <mt-button icon="more">more</mt-button>
 
 ## 轮播图在滑动时，下面的文字抖动是调试工具的问题，手机端没问题
+
+## transform动画 购物车小球不显示
+    不知为何小球是渐变透明色导致，添加 el.style.opacity=1;
+     beforeEnter: function (el) {
+        el.style.transform="translate(0,0)";
+ ##     el.style.opacity=1;
+    }
+
+## 加入购物车曲线动画效果
+##    cubic-bezier(0.49,-0.29,0.75,0.41)  贝赛尔曲线
+##    el.style.transition = "all 0.8s cubic-bezier(0.49,-0.29,0.75,0.41)";
+
+## 加入购物车小球适配问题
+##      js getBoundingClientRect()
+            https://www.cnblogs.com/leejersey/p/4127714.html
+            这个方法返回一个矩形对象，包含四个属性：left、top、right和bottom。分别表示元素各边与页面上边和左边的距离。
+##  通过 ref获取小球元素
+        <div class="ball" v-show="ballflag" ref="ball"></div>
+##      const balltop = this.$refs.ball.getBoundingClientRect().top;
+##      const ballleft = this.$refs.ball.getBoundingClientRect().left;
+
+##      const badgetop = document.getElementById("badge").getBoundingClientRect().top;
+##      const badgeleft= document.getElementById("badge").getBoundingClientRect().left;
+
+        const xDist = badgeleft-ballleft;
+        const yDist = badgetop-balltop;
+
+        //es6 字符串拼接语法
+##      el.style.transform=`translate(${xDist}px,${yDist}px)`;
+
+
+##   Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化
+    Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。
+
+##    你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地提交 (commit) mutation。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。
+    
+    下载包
+##        cnpm i vuex -S
+    安装
+##        import Vuex from 'vuex'
+##        Vue.use(Vuex)
+##        const store = new Vuex.Store({
+                state:{
+##                  //viwe调用方式：this.$store.state.car
+                    car:[]    
+                },
+                mutation:{ 
+##                    //操作数据（修改数据）
+##                    //viwe调用方式： this.$store.commit('addTocar',goodsinfo)
+##                    addTocar(state,goodsinfo){
+                        state.car.push(goodsinfo)
+                    }
+                },
+                getters:{
+##                    //相当于计算属性 （实时计算或改变）
+##                    //viwe调用方式：{{ $store.getters.getAllcount }}
+##                      getAllcount(state){
+                          var c=0;
+                          state.car.forEach(item=>{
+                                c += item.carnum
+                          })
+                          return c;
+                      }  
+                }
+        })
+
+## json对象转字符串 / json字符串转对象
+##    JSON.stringify(obj)
+##    JSON.parse(str)
+
+## 返回按钮的判断
+##    <span slot="left" @click="gobank" v-show="hflag">
+            <mt-button icon="back">返回</mt-button>
+        </span>
+    //返回上一步操作
+    gobank(){
+##      this.$router.go(-1);
+    }
+
+## 监听路由的改变
+    watch:{
+    //通过watch监听路由
+    "$route.path":function(newval){
+      if(newval==='/home'){
+          this.hflag = false;
+      }else{
+          this.hflag = true;
+      }
+    }
+  }
+
+## 判断是否为主页 
+    created(){
+        //判断是否为主页，显示返回按钮的判断
+        if(this.$route.path=='/home'){
+        this.hflag = false
+        }else{
+        this.hflag = true
+        }
+    }

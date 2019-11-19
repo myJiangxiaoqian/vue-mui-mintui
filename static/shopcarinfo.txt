@@ -1,0 +1,20 @@
+[
+    {
+        "id":"87",
+        "title":"联想 Z5S 后置三摄 6.3寸水滴屏",
+        "img":"../../static/img/gooslist/1.jpg",
+        "sell_price":"819.00"
+    },
+    {
+        "id":"88",
+        "title":"华为型号: mate 10 pro 4G全网通",
+        "img":"../../static/img/gooslist/2.jpg",
+        "sell_price":"1328.00"
+    },
+    {
+        "id":"89",
+        "title":"Apple/苹果 iPhone 11",
+        "img":"../../static/img/gooslist/3.jpg",
+        "sell_price":"5499.00"
+    }
+]

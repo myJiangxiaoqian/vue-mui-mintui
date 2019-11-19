@@ -1,10 +1,10 @@
 <template>
     <div class="goodsinfo">
         <transition
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @after-enter="afterEnter">
-            <div class="ball" v-show="ballflag"></div>
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            v-on:after-enter="afterEnter">
+            <div class="ball" v-show="ballflag" ref="ball"></div>
         </transition>
         <div class="mui-card">
             <div class="mui-card-content">
@@ -20,11 +20,7 @@
                     <p>市场价：<del>￥{{ goodsinfoItem.market_price }}</del>&nbsp;&nbsp; 销售价：<span class="nowpice">￥{{ goodsinfoItem.sell_price }}</span></p>
                      <div class="numbox">
                          购买数量:
-                        <div class="mui-numbox" data-numbox-min='1' data-numbox-max='9'>
-                            <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-                            <input id="test" class="mui-input-numbox" type="number" value="1" />
-                            <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
-                        </div>
+                        <numbox @numboxcent="getnumboxcent" :max="goodsinfoItem.stock_quantity"></numbox>
                     </div>   
                     <mt-button type="primary" size="small">立即购买</mt-button>
                     <mt-button type="danger" size="small" @click="goshopcar()">加入购物车</mt-button>
@@ -49,6 +45,8 @@
 </template>
 <script>
 import Swipe from '../swipe/swipe'
+import numbox from '../comment/goodsinfo_numbox'
+import mui from '../../lib/mui/js/mui.min.js'
 export default {
     data(){
         return{
@@ -56,11 +54,13 @@ export default {
             infoLunbo:'',
             goodsinfo:'',
             goodsinfoItem:'',
-            ballflag:true
+            selectnum:1,
+            ballflag:false
         }
     },
     components:{
-        Swipe
+        Swipe,
+        numbox
     },
     created(){
         this.getgoodsinfoLunbo();
@@ -95,33 +95,44 @@ export default {
         //加入购物车
         goshopcar(){
             this.ballflag = !this.ballflag;
+            const goodsinfo = {
+                id:this.id,
+                pice:this.goodsinfoItem.sell_price,
+                carnum:parseInt(this.selectnum),
+                select:true
+            }
+            this.$store.commit('addTocar',goodsinfo);
+            
         },
-        //小球动画钩子函数
-        beforeEnter(el){
+        beforeEnter: function (el) {
             el.style.transform="translate(0,0)";
+            el.style.opacity=1;
         },
-        enter(el, done){
+        // 此回调函数是可选项的设置
+        // 与 CSS 结合时使用
+        enter: function (el, done) {
+            //解决小球适配问题
+            const balltop = this.$refs.ball.getBoundingClientRect().top;
+            const ballleft = this.$refs.ball.getBoundingClientRect().left;
+            const badgetop = document.getElementById("badge").getBoundingClientRect().top;
+            const badgeleft= document.getElementById("badge").getBoundingClientRect().left;
+
+            const xDist = badgeleft-ballleft;
+            const yDist = badgetop-balltop;
+
             el.offsetWidth;
-            el.style.transform="translate(100px,200px)";
-            el.style.transition = "all 1s ease";
+            el.style.transform=`translate(${xDist}px,${yDist}px)`;
+            el.style.transition = "all 0.8s cubic-bezier(0.49,-0.29,0.75,0.41)";
             done();
         },
-        afterEnter(el){
+        afterEnter: function (el) {
             this.ballflag = !this.ballflag;
+        },
+        getnumboxcent(cont){
+            //加入购物车数量
+            this.selectnum = cont;
+            //   console.log(this.selectnum);
         }
-        // beforeEnter(el){
-        //     el.style.transform="translate(0,0)";
-        // },
-        // enter(el,done){
-        //     console.log("2222");
-        //     el.offsetWidth;
-        //     el.style.transform="translate(620px,238px)";
-        //     el.style.transition="all 1s ease";
-        //     done();
-        // },
-        // afterEnter(el){
-        //     this.ballflag = !this.ballflag;
-        // }
     }
 }
 </script>
@@ -141,7 +152,7 @@ export default {
         background-color:red;
         border-radius: 50%;
         position: absolute;
-        z-index:9999;
+        z-index:999999999;
         top:421px;
         left:140px;
     }
